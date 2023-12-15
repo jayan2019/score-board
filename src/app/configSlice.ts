@@ -3,19 +3,21 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 import type { RootState } from "./store";
 
+type ThemeType = "DARK" | "LIGHT";
+
 interface ConfigState {
-  theme: string;
+  theme: ThemeType;
 }
 
 const initialState: ConfigState = {
-  theme: "DARK",
+  theme: "LIGHT",
 };
 
 export const counterSlice = createSlice({
   name: "configs",
   initialState,
   reducers: {
-    changeTheme: (state, action: PayloadAction<string>) => {
+    changeTheme: (state, action: PayloadAction<ThemeType>) => {
       state.theme = action.payload;
     },
   },

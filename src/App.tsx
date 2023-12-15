@@ -1,19 +1,24 @@
 import React from "react";
-import { Button } from "antd";
+import { ConfigProvider, theme } from "antd";
 
+import { router } from "./routes";
 import { useAppSelector } from "./app/hooks";
 import { selectTheme } from "./app/configSlice";
+import { RouterProvider } from "react-router-dom";
+const { defaultAlgorithm, darkAlgorithm } = theme;
 
-function App() {
-  const theme = useAppSelector(selectTheme);
+const App = () => {
+  const sltdTheme = useAppSelector(selectTheme);
 
   return (
-    <div>
-      <Button type="primary">Button</Button>
-      <p>Football World Cup scoreboard</p>
-      <p>{theme}</p>
-    </div>
+    <ConfigProvider
+      theme={{
+        algorithm: sltdTheme === "DARK" ? darkAlgorithm : defaultAlgorithm,
+      }}
+    >
+      <RouterProvider router={router} />
+    </ConfigProvider>
   );
-}
+};
 
 export default App;
