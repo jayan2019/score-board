@@ -1,9 +1,19 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, waitFor } from "@testing-library/react";
+import { Provider } from "react-redux";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import App from "./App";
+import { store } from "./app/store";
+
+describe("App", () => {
+  it("should render correctly", async () => {
+    const { getByText } = render(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
+
+    await waitFor(() => {
+      expect(getByText("SCORE BOARD")).toBeInTheDocument();
+    });
+  });
 });
